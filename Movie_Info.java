@@ -6,12 +6,13 @@ public class Movie_Info {		//영화 정보 저장
 	private String genre;
 	private double ratio;
 	private int audience;
-	private final int movieNum = 1;
 	private double ratioSum;
 	
-	Movie_Info(String name, String genre) {
+	Movie_Info(String name, String genre, int ratioSum, int ratio) {
 		this.name = name;
 		this.genre = genre;
+		this.ratioSum = ratioSum;
+		this.ratio = ratio;
 	}
 	
 	public void setName(String name) {
@@ -44,5 +45,9 @@ public class Movie_Info {		//영화 정보 저장
 	
 	public void setRatio(int ratio) {
 			this.ratio = (double)(ratioSum + ratio)/audience;
+	}
+	
+	public void getInfo() {
+		System.out.println(name + " " + genre + " " + ratio);
 	}
 }
