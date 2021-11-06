@@ -9,7 +9,8 @@ public class Book {			//유저 영화 예매 정보 저장
 		booking.add(m);
 	}
 	
-	public Movie_Info getMovie(int i) {
+	public Movie_Info getBooking(int i) {
 		return booking.get(i);
 	}
+	
 }

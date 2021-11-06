@@ -17,5 +17,11 @@ public class UserList {
 		return u.get(i);
 	}
 	
+	public void printUlist() {
+		for(int i = 0; i < getSize(); i++) {
+			u.get(i).getInfo();
+		}
+	}
+	
 
 }
