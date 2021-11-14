@@ -13,4 +13,13 @@ public class Book {			//유저 영화 예매 정보 저장
 		return booking.get(i);
 	}
 	
+	public int getSize() {
+		return booking.size();
+	}
+	
+	public void printBList() {
+		for(int i = 0; i < booking.size(); i++) {
+			booking.get(i).getInfo();
+		}
+	}
 }

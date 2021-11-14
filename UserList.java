@@ -19,7 +19,7 @@ public class UserList {
 	
 	public void printUlist() {
 		for(int i = 0; i < getSize(); i++) {
-			u.get(i).getInfo();
+			u.get(i).printUInfo();
 		}
 	}
 	

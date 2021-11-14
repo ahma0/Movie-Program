@@ -22,63 +22,73 @@ public class Movie {
 		
 		//초기 유저 세팅
 		ul.addUsers(new User_Info("firstuser34", "qwerty1234", "홍길동"));
+		ul.addUsers(new User_Info("firstr34", "qwert234", "홍길"));
 		ul.printUlist();
 	}
 	
-	public void lr() throws IOException {		//로그인 or 회원가입
+	public int lr() throws IOException {		//로그인 or 회원가입
 		int ans;
 		
-		System.out.print("(0) 로그인    (1) 회원가입: ");
-		ans = Integer.parseInt(br.readLine());
+		while(true) {
+			System.out.print("(0) 로그인    (1) 회원가입: ");
+			ans = Integer.parseInt(br.readLine());
 		
-		if(ans == 0) login();			// 로그인 함수로 이동
-		else if (ans == 1) register();	// 회원가입 함수로 이동
+			if(ans == 0) return login();			// 로그인 함수로 이동
+			else if (ans == 1) return register();	// 회원가입 함수로 이동
+			else
+				System.out.println("잘못된 입력입니다.");
+		}
 		
 	}
 	
-	private void login() throws IOException {
+	private int login() throws IOException {
 		String id, pw;
-		boolean flag = false;
+		int num;
 		
 		System.out.println("\n\nLogIn\n");
 		
-		do {
+		while(true) {
 			System.out.print("ID: ");
 			id = br.readLine();
 			System.out.print("PW: ");
 			pw = br.readLine();
 			
-			if(findUser(id, pw)) {
-				flag = true;
+			num = findUser(id, pw);
+			
+			if(num != -1) {
+				
 				System.out.println("로그인 되었습니다.");
+				return num;
 			}
 			else 
 				System.out.println("아이디 또는 비밀번호가 틀렸습니다.");
 			
-		} while(!flag);
+		}
 	}
 	
-	private boolean findUser(String id, String pw) {		//찾으면 true 못찾으면 false
+	private int findUser(String id, String pw) {		//찾으면 식별번호 리턴 못찾으면 -1
 		for(int i = 0; i < ul.getSize(); i++) {
 			if(id.equals(ul.getUser(i).getID())) {
-				if(pw.equals("-1")) return true;
+				if(pw.equals("-1")) 
+					return ul.getUser(i).getUserNum();
 				else {
-					if(pw.equals(ul.getUser(i).getPW())) return true;
+					if(pw.equals(ul.getUser(i).getPW())) 
+						return ul.getUser(i).getUserNum();
 					else break;
 				}
 			}
 		}
 		
-		return false;
+		return -1;
 	}
 	
-	private void register() throws IOException {
-		boolean flag = false;
+	private int register() throws IOException {
 		String name, id, pw;
+		int num;
 		
 		System.out.println("\n\nRegister\n");
 		
-		do {
+		while(true) {
 			System.out.print("Name: ");
 			name = br.readLine();
 			System.out.print("ID: ");
@@ -86,16 +96,18 @@ public class Movie {
 			System.out.print("PW: ");
 			pw = br.readLine();
 			
-			if(!findUser(id, "-1")) {
-				flag = true;
+			num = findUser(id, "-1");
+			
+			if(num == -1) {
 				ul.addUsers(new User_Info(id, pw, name));
 				System.out.println("회원가입 되었습니다.");
 				System.out.println("다시 로그인 해주세요.");
-				login();
+				num = login();
+				return num;
 			}
 			else System.out.println("이미 사용되고 있는 아이디입니다.");
 			
-		}while(!flag);
+		}
 	}
 
 }
