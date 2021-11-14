@@ -29,39 +29,42 @@
 
 <table>
   <tr>
-    <td colspan = 2>주차</td>
+    <td colspan = 3>주차</td>
     <td colspan = 4>내용</td>
   </tr>
   <tr>
-    <td colspan = 2>6 ~ 7주차</td>
-    <td colspan = 4>프로그램 주제 및 예상 진도 작성 (시험기간이므로)</td>
+    <td colspan = 3>6주차</td>
+    <td colspan = 4, rowspan = 2>프로그램 주제 및 예상 진도 작성 (시험기간이므로)</td>
   </tr>
   <tr>
-    <td colspan = 2>8주차</td>
+    <td colspan = 3>7주차</td>
+  </tr>
+  <tr>
+    <td colspan = 3>8주차</td>
     <td colspan = 4>사용자의 정보(아이디, 비밀번호 등등)를 저장하는 클래스와 영화 정보를 저장하는 클래스, 사용자 목록, 예매 표 목록 등 구현</td>
   </tr>
   <tr>
-    <td colspan = 2>9주차</td>
+    <td colspan = 3>9주차</td>
     <td colspan = 4>난수의 관객을 생성시켜 난수의 평점을 주는 함수와 영화 목록을 띄우는 프로그램을 작성.</td>
   </tr>
   <tr>
-    <td colspan = 2>10주차</td>
+    <td colspan = 3>10주차</td>
     <td colspan = 4>로그인 및 회원가입 기능 구현.</td>
   </tr>
   <tr>
-    <td colspan = 2>11주차</td>
+    <td colspan = 3>11주차</td>
     <td colspan = 4>자리 예약 및 변경, 취소 기능 구현.</td>
   </tr>
   <tr>
-    <td colspan = 2>12주차</td>
+    <td colspan = 3>12주차</td>
     <td colspan = 4>영화 목록을 평점에 따라 정렬하는 기능 구현.</td>
   </tr>
   <tr>
-    <td colspan = 2>13주차</td>
+    <td colspan = 3>13주차</td>
     <td colspan = 4>영화를 예매하는 기능 구현.</td>
   </tr>
   <tr>
-    <td colspan = 2>14주차</td>
+    <td colspan = 3>14주차</td>
     <td colspan = 4>오류 및 프로그램 수정.</td>
   </tr>
 </table>
