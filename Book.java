@@ -18,8 +18,12 @@ public class Book {			//유저 영화 예매 정보 저장
 	}
 	
 	public void printBList() {
-		for(int i = 0; i < booking.size(); i++) {
-			booking.get(i).getInfo();
+		int cnt = 1;
+		System.out.println("\t제목\t장르\t평점");
+
+		for(Movie_Info m : booking) {
+			System.out.println(cnt + "\t" + m.getName() + "\t" + m.getGenre() + "\t" + m.getRatio());
+			cnt++;
 		}
 	}
 }

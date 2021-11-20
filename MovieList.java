@@ -1,6 +1,7 @@
 package movie;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MovieList {
 	ArrayList<Movie_Info> mlist = new ArrayList<Movie_Info>();
@@ -13,10 +14,21 @@ public class MovieList {
 		mlist.add(m);
 	}
 	
+	public void sortMlist() {
+		Collections.sort(mlist);
+	}
+	
 	public void printMlist() {
-		for(int i = 0; i < getSize(); i++) {
-			System.out.print((i + 1) + " ");
-			mlist.get(i).getInfo();
+		int cnt = 1;
+		
+		//sortMlist();
+		Collections.sort(mlist);
+		
+		System.out.println("\t제목\t장르\t평점");
+		
+		for(Movie_Info m : mlist) {
+			System.out.println(cnt + "\t" + m.getName() + "\t" + m.getGenre() + "\t" + m.getRatio());
+			cnt++;
 		}
 	}
 	
