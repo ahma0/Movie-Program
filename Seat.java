@@ -11,10 +11,10 @@ public class Seat {			//자리 예매
 	//Movie m;
 	UserList u = new UserList();
 	
-	Seat(Movie m, int userID) throws IOException {
+	Seat(UserList u, int userID) throws IOException {
 		//this.m = m;
 		this.userID = userID;
-		u = m.ul;
+		this.u = u;
 		
 		init();
 		book();
@@ -35,7 +35,7 @@ public class Seat {			//자리 예매
 				}
 				else if(j == 0 && i != 6) {
 					s[i][j] = (char)n;
-					n++;					//여기서부터 고치기
+					n++;	
 				}
 				else if(i == 6 || j == 6) s[i][j] = ' ';
 				else s[i][j] = '□';
@@ -43,11 +43,18 @@ public class Seat {			//자리 예매
 		}
 	}
 	
-	private void book() throws IOException {
-		boolean flag = false;
+	private void book() throws IOException {				//함수로 나눠야할듯..
+		//boolean flag = false;
 		String ans;
-		int n = 0, ansn = 0;
+		//int n = 0, ansn = 0;
 		
+		printSeat();
+		System.out.print("예약할 좌석을 선택해주세요: ");
+		ans = br.readLine();
+		SBooking(ans);
+		u.getUser(userID - 1).getBook().addSeats(ans);
+		
+		/*
 		do {	
 			System.out.print("(1) 좌석 예약 \t (2) 좌석 변경 \t (3) 좌석 취소 \t (4) 나가기: ");
 			n = Integer.parseInt(br.readLine());
@@ -62,7 +69,7 @@ public class Seat {			//자리 예매
 				System.out.print("예약할 좌석을 선택해주세요: ");
 				ans = br.readLine();
 				SBooking(ans);
-				u.getUser(userID - 1).addSeats(ans);
+				u.getUser(userID - 1).getBook().addSeats(ans);
 				
 				break;
 
@@ -72,19 +79,19 @@ public class Seat {			//자리 예매
 				break;
 				
 			case 3:
-				u.getUser(userID - 1).printBSList();
+				u.getUser(userID - 1).getBook().printBSList();
 				
-				if(u.getUser(userID - 1).getSInfo().isEmpty()) {
+				if(u.getUser(userID - 1).getBook().getSInfo().isEmpty()) {
 					System.out.println("\t목록이 비어있습니다.");
 					break;
 				}
 				
 				System.out.print("취소할 좌석 번호를 선택해주세요: ");
 				ansn = Integer.parseInt(br.readLine());
-				u.getUser(userID - 1).removeSeat(ansn - 1);
+				u.getUser(userID - 1).getBook().removeSeat(ansn - 1);
 				System.out.println("취소되었습니다.\n");
 				
-				u.getUser(userID - 1).printBSList();
+				u.getUser(userID - 1).getBook().printBSList();
 				
 				break;
 				
@@ -94,6 +101,7 @@ public class Seat {			//자리 예매
 			}
 	
 		} while(!flag);
+		*/
 	}
 	
 	private void SBooking(String ans) {
@@ -113,14 +121,15 @@ public class Seat {			//자리 예매
 		
 	}
 	
+	/*
 	private void changeSeat() throws IOException {
 		String ans;
 		int ansn = 0;
 		
 		printSeat();
-		u.getUser(userID - 1).printBSList();		//예약한 좌석 목록 프린트
+		u.getUser(userID - 1).getBook().printBSList();		//예약한 좌석 목록 프린트
 		
-		if(u.getUser(userID - 1).getSInfo().isEmpty()) {
+		if(u.getUser(userID - 1).getBook().getSInfo().isEmpty()) {
 			System.out.println("\t목록이 비어있습니다.");
 			return;
 		}
@@ -132,18 +141,18 @@ public class Seat {			//자리 예매
 		System.out.print("변경하고싶은 좌석을 선택해주세요: ");
 		ans = br.readLine();
 		
-		int index[] = findSeat(u.getUser(userID - 1).getSeat(ansn - 1).charAt(0), u.getUser(userID - 1).getSeat(ansn - 1).charAt(1));
+		int index[] = findSeat(u.getUser(userID - 1).getBook().getSeat(ansn - 1).charAt(0), u.getUser(userID - 1).getBook().getSeat(ansn - 1).charAt(1));
 		
 		if(index[0] == -1) 
 			System.out.println("존재하지 않는 좌석입니다.");
 		else {
 			s[index[0]][index[1]] = '□';
-			u.getUser(userID - 1).replaceSeat(ansn - 1, ans);
+			u.getUser(userID - 1).getBook().replaceSeat(ansn - 1, ans);
 			SBooking(ans);
 		}
 		
 	}
-	
+	*/
 	private int[] findSeat(char a, char b) {
 		int ans[] = new int[2];
 		

@@ -10,6 +10,10 @@ public class MovieList {
 		return mlist.size();
 	}
 	
+	public Movie_Info getMovie(int i) {
+		return mlist.get(i);
+	}
+	
 	public void addMlist(Movie_Info m) {
 		mlist.add(m);
 	}
@@ -24,7 +28,7 @@ public class MovieList {
 		//sortMlist();
 		Collections.sort(mlist);
 		
-		System.out.println("\t제목\t장르\t평점");
+		System.out.println("순위\t제목\t장르\t평점");
 		
 		for(Movie_Info m : mlist) {
 			System.out.println(cnt + "\t" + m.getName() + "\t" + m.getGenre() + "\t" + m.getRatio());

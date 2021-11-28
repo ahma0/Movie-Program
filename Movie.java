@@ -6,11 +6,14 @@ import java.io.InputStreamReader;
 import java.util.Random;
 
 public class Movie {
+	private int userID;
 	Random r = new Random();
 	MovieList ml = new MovieList();
 	UserList ul = new UserList();
 	Movie_Info m;
 	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	LogInRegister lr = new LogInRegister(ul);
+	
 	
 	public void First_Setting() {
 		//초기 영화 정보
@@ -26,88 +29,81 @@ public class Movie {
 		ul.printUlist();
 	}
 	
-	public int lr() throws IOException {		//로그인 or 회원가입
-		int ans;
-		
-		while(true) {
-			System.out.print("(0) 로그인    (1) 회원가입: ");
-			ans = Integer.parseInt(br.readLine());
-		
-			if(ans == 0) return login();			// 로그인 함수로 이동
-			else if (ans == 1) return register();	// 회원가입 함수로 이동
-			else
-				System.out.println("잘못된 입력입니다.");
-		}
-		
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 	
-	private int login() throws IOException {
-		String id, pw;
-		int num;
+	public void MBooking(int userID) throws IOException {
+		String ans, ans2;
+		int n;
+		Seat s;
 		
-		System.out.println("\n\nLogIn\n");
+		System.out.println("--- 영화 예매 ---\n");
 		
-		while(true) {
-			System.out.print("ID: ");
-			id = br.readLine();
-			System.out.print("PW: ");
-			pw = br.readLine();
+		do {
+			System.out.print("(1) 영화 예매    (2) 예매한 영화 목록    (3) 예매 취소    (4) 나가기: ");
+			ans = br.readLine();
 			
-			num = findUser(id, pw);
+			if(ans.equals("4")) {
+				System.out.println("종료합니다.");
+				break;
+			}
 			
-			if(num != -1) {
+			switch (ans) {
+			case "1":
+				ml.printMlist();
 				
-				System.out.println("로그인 되었습니다.");
-				return num;
+				System.out.print("예매할 영화의 이름을 작성해주세요: ");
+				ans2 = br.readLine();
+				
+				n = findMovie(ans2);
+				
+				ul.getUser(userID - 1).addMovies(ml.getMovie(n));
+				s = new Seat(ul, userID);
+				
+				break;
+
+			case "2":
+				System.out.println("-- 예매 리스트 --");
+				ul.getUser(userID - 1).getBook().printBList();
+				
+				if(ul.getUser(userID - 1).getBook().isBLEmpty()) System.out.println("예매한 영화가 없습니다.");
+				
+				break;
+				
+			case "3":
+				System.out.println("-- 예매 리스트 --");
+				ul.getUser(userID - 1).getBook().printBList();
+				
+				if(ul.getUser(userID - 1).getBook().isBLEmpty()) System.out.println("예매한 영화가 없습니다.");
+				else {
+					System.out.print("취소할 영화를 선택해주세요(숫자입력): ");
+					n = Integer.parseInt(br.readLine());
+					ul.getUser(userID - 1).getBook().removeMovie(n - 1);
+					ul.getUser(userID - 1).getBook().removeSeat(n - 1);
+					
+					System.out.println("취소되었습니다.");
+				}
+				
+				break;
+				
+			default:
+				System.out.println("잘못된 입력입니다.");
+				break;
 			}
-			else 
-				System.out.println("아이디 또는 비밀번호가 틀렸습니다.");
-			
-		}
+		} while(true);
+		
 	}
 	
-	private int findUser(String id, String pw) {		//찾으면 식별번호 리턴 못찾으면 -1
-		for(int i = 0; i < ul.getSize(); i++) {
-			if(id.equals(ul.getUser(i).getID())) {
-				if(pw.equals("-1")) 
-					return ul.getUser(i).getUserNum();
-				else {
-					if(pw.equals(ul.getUser(i).getPW())) 
-						return ul.getUser(i).getUserNum();
-					else break;
-				}
-			}
+	public int findMovie(String ans) {
+		for(int i = 0; i < ml.getSize(); i++) {
+			if(ml.getMovie(i).getName().equals(ans))
+				return i;
 		}
 		
 		return -1;
 	}
 	
-	private int register() throws IOException {
-		String name, id, pw;
-		int num;
-		
-		System.out.println("\n\nRegister\n");
-		
-		while(true) {
-			System.out.print("Name: ");
-			name = br.readLine();
-			System.out.print("ID: ");
-			id = br.readLine();
-			System.out.print("PW: ");
-			pw = br.readLine();
-			
-			num = findUser(id, "-1");
-			
-			if(num == -1) {
-				ul.addUsers(new User_Info(id, pw, name));
-				System.out.println("회원가입 되었습니다.");
-				System.out.println("다시 로그인 해주세요.");
-				num = login();
-				return num;
-			}
-			else System.out.println("이미 사용되고 있는 아이디입니다.");
-			
-		}
-	}
+	
 
 }

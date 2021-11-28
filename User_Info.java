@@ -1,15 +1,13 @@
 package movie;
 
-import java.util.ArrayList;
-
 public class User_Info {		//유저정보 저장
 	private String id;
 	private String pw;
 	private String name;
 	private static int MaxUserNum = 0;
 	private int UserNum = 0;
-	ArrayList<Book> movies = new ArrayList<Book>();
-	ArrayList<String> seats = new ArrayList<String>();
+	private Book booking = new Book();
+	//private ArrayList<String> seats = new ArrayList<String>();
 	
 	User_Info(String id, String pw, String name) {
 		this.id = id;
@@ -36,10 +34,15 @@ public class User_Info {		//유저정보 저장
 		return UserNum;
 	}
 	
-	public void addMovies(Book b) {
-		movies.add(b);
+	public void addMovies(Movie_Info m) {
+		booking.addBMovie(m);
 	}
 	
+	public Book getBook() {
+		return booking;
+	}
+	
+	/*
 	public void addSeats(String s) {
 		seats.add(s);
 	}
@@ -55,11 +58,13 @@ public class User_Info {		//유저정보 저장
 	public void removeSeat(int i) {
 		seats.remove(i);
 	}
+	*/
 	
 	public void printUInfo() {
 		System.out.println(name + " " + id + " " + pw);
 	}
 	
+	/*
 	public ArrayList<String> getSInfo() {
 		return seats;
 	}
@@ -70,5 +75,6 @@ public class User_Info {		//유저정보 저장
 			System.out.println(i + 1 + ". " + getSeat(i));	
 		}
 	}
+	*/
 
 }

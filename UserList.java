@@ -9,6 +9,10 @@ public class UserList {
 		return u.size();
 	}
 	
+	public boolean isULEmpty() {
+		return u.isEmpty();
+	}
+	
 	public void addUsers(User_Info uI) {
 		u.add(uI);
 	}

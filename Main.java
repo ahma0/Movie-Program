@@ -9,10 +9,12 @@ public class Main {
 	}
 	
 	public static void play() throws IOException {
+		int userID;
+		
 		Movie m = new Movie();
 		m.First_Setting();
-		
-		Seat s = new Seat(m, m.lr());
+		userID = m.lr.lr();
+		m.MBooking(userID);
 		
 	}
 
