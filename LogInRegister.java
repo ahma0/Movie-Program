@@ -16,6 +16,7 @@ public class LogInRegister {
 		int ans;
 		
 		while(true) {
+			System.out.println("로그인 하시겠습니까?");
 			System.out.print("(0) 로그인    (1) 회원가입: ");
 			ans = Integer.parseInt(br.readLine());
 		
@@ -31,7 +32,7 @@ public class LogInRegister {
 		String id, pw;
 		int num;
 		
-		System.out.println("\n\nLogIn\n");
+		System.out.println("\nLogIn\n");
 		
 		while(true) {
 			System.out.print("ID: ");

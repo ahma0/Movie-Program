@@ -11,12 +11,15 @@ public class Seat {			//자리 예매
 	//Movie m;
 	UserList u = new UserList();
 	
-	Seat(UserList u, int userID) throws IOException {
+	Seat(UserList u, int userID) {
 		//this.m = m;
 		this.userID = userID;
 		this.u = u;
 		
 		init();
+	}
+	
+	public void startBook() throws IOException {
 		book();
 	}
 	
@@ -121,29 +124,21 @@ public class Seat {			//자리 예매
 		
 	}
 	
-	/*
-	private void changeSeat() throws IOException {
+	public void changeSeat() throws IOException {
 		String ans;
 		int ansn = 0;
 		
-		printSeat();
-		u.getUser(userID - 1).getBook().printBSList();		//예약한 좌석 목록 프린트
-		
-		if(u.getUser(userID - 1).getBook().getSInfo().isEmpty()) {
-			System.out.println("\t목록이 비어있습니다.");
-			return;
-		}
-			
-		
-		
-		System.out.print("변경할 좌석 번호를 선택해주세요: ");
+
+		System.out.print("변경할 좌석을 선택해주세요(숫자입력): ");
 		ansn = Integer.parseInt(br.readLine());
-		System.out.print("변경하고싶은 좌석을 선택해주세요: ");
+		
+		printSeat();
+		System.out.print("어떤 좌석을 예매하시겠습니까?: ");
 		ans = br.readLine();
 		
 		int index[] = findSeat(u.getUser(userID - 1).getBook().getSeat(ansn - 1).charAt(0), u.getUser(userID - 1).getBook().getSeat(ansn - 1).charAt(1));
 		
-		if(index[0] == -1) 
+		if(index[0] == -1)
 			System.out.println("존재하지 않는 좌석입니다.");
 		else {
 			s[index[0]][index[1]] = '□';
@@ -152,17 +147,17 @@ public class Seat {			//자리 예매
 		}
 		
 	}
-	*/
+	
 	private int[] findSeat(char a, char b) {
 		int ans[] = new int[2];
 		
 		for(int i = 0; i < 12; i++) {
 			if(s[0][i] == a) {
-				ans[0] = i;
+				ans[1] = i;
 				
 				for(int j = 0; j < 12; j++) {
 					if(s[j][0] == b) {
-						ans[1] = j;
+						ans[0] = j;
 						return ans;
 					}
 						

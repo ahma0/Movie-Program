@@ -11,11 +11,13 @@ public class Movie {
 	MovieList ml = new MovieList();
 	UserList ul = new UserList();
 	Movie_Info m;
+	Seat s;
 	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	LogInRegister lr = new LogInRegister(ul);
 	
 	
 	public void First_Setting() {
+		System.out.println("--------------초기 셋팅-------------");
 		//초기 영화 정보
 		ml.addMlist(new Movie_Info("액시트", "액션", r.nextInt(50) + 1, r.nextInt(5) + 5));
 		ml.addMlist(new Movie_Info("해리포터", "판타지", r.nextInt(50) + 1, r.nextInt(5) + 5));
@@ -27,6 +29,7 @@ public class Movie {
 		ul.addUsers(new User_Info("firstuser34", "qwerty1234", "홍길동"));
 		ul.addUsers(new User_Info("firstr34", "qwert234", "홍길"));
 		ul.printUlist();
+		System.out.println();
 	}
 	
 	public void setUserID(int userID) {
@@ -36,15 +39,15 @@ public class Movie {
 	public void MBooking(int userID) throws IOException {
 		String ans, ans2;
 		int n;
-		Seat s;
+		s = new Seat(ul, userID);
 		
 		System.out.println("--- 영화 예매 ---\n");
 		
 		do {
-			System.out.print("(1) 영화 예매    (2) 예매한 영화 목록    (3) 예매 취소    (4) 나가기: ");
+			System.out.print("(1) 영화 예매    (2) 예매한 영화 목록    (3) 예매 좌석 변경  (4) 예매 취소    (5) 나가기: ");
 			ans = br.readLine();
 			
-			if(ans.equals("4")) {
+			if(ans.equals("5")) {
 				System.out.println("종료합니다.");
 				break;
 			}
@@ -57,9 +60,8 @@ public class Movie {
 				ans2 = br.readLine();
 				
 				n = findMovie(ans2);
-				
+				s.startBook();
 				ul.getUser(userID - 1).addMovies(ml.getMovie(n));
-				s = new Seat(ul, userID);
 				
 				break;
 
@@ -67,11 +69,23 @@ public class Movie {
 				System.out.println("-- 예매 리스트 --");
 				ul.getUser(userID - 1).getBook().printBList();
 				
-				if(ul.getUser(userID - 1).getBook().isBLEmpty()) System.out.println("예매한 영화가 없습니다.");
+				if(ul.getUser(userID - 1).getBook().isBLEmpty()) 
+					System.out.println("예매한 영화가 없습니다.");
 				
 				break;
 				
 			case "3":
+				System.out.println("-- 예매 리스트 --");
+				ul.getUser(userID - 1).getBook().printBList();
+				
+				if(ul.getUser(userID - 1).getBook().isBLEmpty()) System.out.println("예매한 영화가 없습니다.");
+				else {
+					s.changeSeat();
+					System.out.println("변경되었습니다.");
+				}
+				break;
+				
+			case "4":
 				System.out.println("-- 예매 리스트 --");
 				ul.getUser(userID - 1).getBook().printBList();
 				
